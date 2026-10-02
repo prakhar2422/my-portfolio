@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prakhar Srivastava — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#10151c; --panel:#161d28; --panel2:#1c2430; --line:#2a3443;
+  --text:#e7ecf2; --muted:#8b97a8; --amber:#f2a93c; --teal:#3fd0c9;
+  color-scheme: dark;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;}
+html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-ui,sans-serif;line-height:1.55;}
+h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif;margin:0;font-weight:600;}
+a{color:inherit;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+::selection{background:var(--amber);color:#10151c;}
+
+/* ---- Layout shell ---- */
+.shell{display:grid;grid-template-columns:220px 1fr;gap:0;}
+nav.rail{position:sticky;top:0;align-self:start;height:100vh;padding:48px 20px 40px 32px;border-right:1px solid var(--line);}
+nav.rail .name{font-size:15px;font-weight:600;margin-bottom:4px;}
+nav.rail .role{font-size:12px;color:var(--muted);margin-bottom:40px;}
+nav.rail ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;}
+nav.rail li a{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);text-decoration:none;}
+nav.rail li a .dot{width:6px;height:6px;border-radius:50%;background:var(--line);flex:0 0 auto;}
+nav.rail li a.active{color:var(--text);}
+nav.rail li a.active .dot{background:var(--amber);box-shadow:0 0 0 3px rgba(242,169,60,.18);}
+nav.rail li a:hover{color:var(--text);}
+main{min-width:0;}
+
+/* ---- Hero ---- */
+.hero{padding:88px 48px 72px;border-bottom:1px solid var(--line);}
+.hero .eyebrow{font-size:13px;color:var(--teal);margin-bottom:18px;}
+.hero h1{font-size:clamp(34px,5vw,56px);line-height:1.08;max-width:14ch;}
+.hero .lede{max-width:56ch;color:var(--muted);font-size:17px;margin-top:22px;}
+.hero .cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;}
+.btn{padding:11px 20px;border-radius:7px;font-size:14px;text-decoration:none;border:1px solid var(--line);display:inline-block;}
+.btn.primary{background:var(--amber);color:#10151c;border-color:var(--amber);font-weight:600;}
+.btn:hover{border-color:var(--muted);}
+.btn.primary:hover{filter:brightness(1.07);}
+
+.diagram{margin-top:56px;opacity:0;animation:rise .7s .15s ease forwards;}
+@keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.diagram svg{width:100%;height:auto;display:block;}
+
+/* ---- Stat strip ---- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line);}
+.stat{padding:26px 28px;border-right:1px solid var(--line);}
+.stat:last-child{border-right:none;}
+.stat .n{font-family:'Space Grotesk';font-size:26px;color:var(--amber);}
+.stat .l{font-size:12.5px;color:var(--muted);margin-top:4px;}
+
+/* ---- Section header ---- */
+section{padding:72px 48px;border-bottom:1px solid var(--line);}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:38px;}
+.sec-head .idx{font-family:'IBM Plex Mono';color:var(--muted);font-size:13px;}
+.sec-head h2{font-size:26px;}
+
+/* ---- Experience ---- */
+.job{display:grid;grid-template-columns:200px 1fr;gap:36px;}
+.job .meta{color:var(--muted);font-size:13px;}
+.job .meta .company{color:var(--text);font-weight:600;font-size:15px;font-family:'Space Grotesk';margin-bottom:6px;}
+.job .meta .dates{font-family:'IBM Plex Mono';}
+.job ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;}
+.job li{padding-left:18px;position:relative;color:#cdd5e0;font-size:15px;}
+.job li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--teal);border-radius:1px;}
+.stack{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px;}
+.chip{font-family:'IBM Plex Mono';font-size:12px;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:5px;}
+
+/* ---- Projects ---- */
+.project{padding:28px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1.4fr;gap:40px;}
+.project:first-child{border-top:none;}
+.project h3{font-size:20px;margin-bottom:10px;}
+.project .sub{color:var(--teal);font-size:13px;font-family:'IBM Plex Mono';margin-bottom:14px;}
+.project p{color:var(--muted);font-size:14.5px;margin:0 0 14px;}
+.project .stack{margin-top:0;}
+.arch{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:20px;}
+.arch .row{display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono';font-size:12px;color:var(--muted);margin-bottom:10px;}
+.arch .row:last-child{margin-bottom:0;}
+.arch .node{padding:5px 10px;border:1px solid var(--line);border-radius:5px;color:var(--text);}
+.arch .arrow{color:var(--amber);}
+
+/* ---- Skills ---- */
+.skillgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+.skillcol h4{font-size:13px;color:var(--muted);font-weight:500;margin-bottom:14px;font-family:'IBM Plex Mono';}
+.skillcol ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+.skillcol li{font-size:14.5px;}
+
+/* ---- Certs / education ---- */
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+.cert{border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:12px;}
+.cert .t{font-weight:600;font-size:14.5px;}
+.cert .y{color:var(--muted);font-size:12.5px;margin-top:3px;font-family:'IBM Plex Mono';}
+.edu .t{font-weight:600;font-size:15px;}
+.edu .s{color:var(--muted);font-size:13.5px;margin-top:6px;}
+
+/* ---- Footer ---- */
+footer{padding:56px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+footer .big{font-family:'Space Grotesk';font-size:22px;}
+footer .links{display:flex;gap:22px;font-size:13.5px;color:var(--muted);}
+footer .links a:hover{color:var(--text);}
+
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr;}
+  nav.rail{position:static;height:auto;padding:24px 24px 0;border-right:none;border-bottom:1px solid var(--line);}
+  nav.rail ul{flex-direction:row;flex-wrap:wrap;gap:16px 20px;}
+  .hero,section,footer{padding-left:24px;padding-right:24px;}
+  .stats{grid-template-columns:repeat(2,1fr);}
+  .stat:nth-child(2){border-right:none;}
+  .job,.project,.twocol,.skillgrid{grid-template-columns:1fr;}
+  .skillgrid{gap:24px;}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <nav class="rail">
+    <div class="name">Prakhar Srivastava</div>
+    <div class="role">Full Stack Developer</div>
+    <ul>
+      <li><a href="#top" class="navlink active"><span class="dot"></span>Intro</a></li>
+      <li><a href="#experience" class="navlink"><span class="dot"></span>Experience</a></li>
+      <li><a href="#projects" class="navlink"><span class="dot"></span>Projects</a></li>
+      <li><a href="#skills" class="navlink"><span class="dot"></span>Skills</a></li>
+      <li><a href="#credentials" class="navlink"><span class="dot"></span>Credentials</a></li>
+      <li><a href="#contact" class="navlink"><span class="dot"></span>Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="top" class="hero" style="border-bottom:none;padding-bottom:0;">
+      <div class="eyebrow mono">Backend-leaning full stack · Applied AI</div>
+      <h1>I build event-driven systems that don't fall over under load.</h1>
+      <p class="lede">3 years at TCS designing ASP.NET Core microservices — Kafka and RabbitMQ pipelines, Redis caching, Kubernetes deployments — plus Angular/React on the front end and Oracle-certified in Generative AI.</p>
+      <div class="cta">
+        <a class="btn primary" href="#contact">Get in touch</a>
+        <a class="btn" href="#projects">See the projects</a>
+      </div>
+
+      <div class="diagram">
+        <svg viewBox="0 0 980 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Request flow: client to gateway to services to data layer">
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#8b97a8"/></marker>
+          </defs>
+          <g font-family="IBM Plex Mono" font-size="12" fill="#e7ecf2">
+            <rect x="0" y="55" width="86" height="40" rx="6" fill="#161d28" stroke="#2a3443"/>
+            <text x="43" y="79" text-anchor="middle">Client</text>
+
+            <line x1="86" y1="75" x2="150" y2="75" stroke="#8b97a8" stroke-width="1.4" marker-end="url(#arrow)"/>
+            <rect x="150" y="55" width="110" height="40" rx="6" fill="#161d28" stroke="#2a3443"/>
+            <text x="205" y="79" text-anchor="middle">API Gateway</text>
+
+            <line x1="260" y1="75" x2="330" y2="75" stroke="#8b97a8" stroke-width="1.4" marker-end="url(#arrow)"/>
+            <rect x="330" y="10" width="120" height="36" rx="6" fill="#161d28" stroke="#2a3443"/>
+            <text x="390" y="33" text-anchor="middle">Order Service</text>
+            <rect x="330" y="57" width="120" height="36" rx="6" fill="#161d28" stroke="#2a3443"/>
+            <text x="390" y="80" text-anchor="middle">Leave Service</text>
+            <rect x="330" y="104" width="120" height="36" rx="6" fill="#161d28" stroke="#2a3443"/>
+            <text x="390" y="127" text-anchor="middle">Notify Service</text>
+            <line x1="260" y1="75" x2="330" y2="28" stroke="#2a3443" stroke-width="1.2"/>
+            <line x1="260" y1="75" x2="330" y2="122" stroke="#2a3443" stroke-width="1.2"/>
+
+            <line x1="450" y1="75" x2="520" y2="75" stroke="#f2a93c" stroke-width="1.4" marker-end="url(#arrow)">
+              <animate attributeName="stroke-opacity" values="1;.25;1" dur="2.6s" repeatCount="indefinite"/>
+            </line>
+            <rect x="520" y="55" width="110" height="40" rx="6" fill="#1c2430" stroke="#f2a93c"/>
+            <text x="575" y="79" text-anchor="middle" fill="#f2a93c">Kafka · MQ</text>
+
+            <line x1="630" y1="75" x2="700" y2="75" stroke="#3fd0c9" stroke-width="1.4" marker-end="url(#arrow)"/>
+            <rect x="700" y="55" width="90" height="40" rx="6" fill="#161d28" stroke="#2a3443"/>
+            <text x="745" y="79" text-anchor="middle">Redis</text>
+
+            <line x1="790" y1="75" x2="860" y2="75" stroke="#8b97a8" stroke-width="1.4" marker-end="url(#arrow)"/>
+            <rect x="860" y="55" width="110" height="40" rx="6" fill="#161d28" stroke="#2a3443"/>
+            <text x="915" y="79" text-anchor="middle">Mongo · SQL</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <div class="stats">
+      <div class="stat"><div class="n">10M+</div><div class="l">events/day via Kafka &amp; RabbitMQ</div></div>
+      <div class="stat"><div class="n">350→120ms</div><div class="l">latency after Redis caching</div></div>
+      <div class="stat"><div class="n">85%+</div><div class="l">test coverage, xUnit &amp; Moq</div></div>
+      <div class="stat"><div class="n">35%</div><div class="l">fewer production bugs</div></div>
+    </div>
+
+    <section id="experience">
+      <div class="sec-head"><span class="idx mono">01</span><h2>Experience</h2></div>
+      <div class="job">
+        <div class="meta">
+          <div class="company">Tata Consultancy Services</div>
+          <div>Full Stack Developer</div>
+          <div class="dates">Oct 2023 — Present</div>
+        </div>
+        <div>
+          <ul>
+            <li>Designed and maintained scalable ASP.NET Core backend services in a microservices architecture, integrating Angular front ends with Azure/AWS cloud services.</li>
+            <li>Built data access layers with Entity Framework Core across SQL and MongoDB, refactoring query patterns to cut database CPU utilization and query execution time.</li>
+            <li>Integrated Redis caching for high-traffic reads, taking latency from 350ms to 120ms and lifting peak throughput.</li>
+            <li>Built event-driven pipelines on Kafka and RabbitMQ handling 10M+ daily events with decoupled service communication.</li>
+            <li>Implemented CQRS-based services with EF Core, wiring RESTful APIs into an Angular/NgRx front end and cutting Contract Module development effort by 20%.</li>
+            <li>Built event-driven notification microservices with RabbitMQ, reducing service coupling.</li>
+            <li>Secured internal services end-to-end with OAuth2 and JWT, closing token vulnerabilities and standardizing auth across services.</li>
+            <li>Containerized services with Docker and ran them on AKS — HPA, rolling updates, readiness/liveness probes — behind zero-downtime CI/CD pipelines.</li>
+            <li>Took test coverage past 85% with xUnit and Moq, including prompt evaluation and output validation for GenAI/LLM components, cutting production bugs by 35%.</li>
+            <li>Owned production release management end-to-end, delivering a zero-incident go-live.</li>
+          </ul>
+          <div class="stack">
+            <span class="chip">ASP.NET Core</span><span class="chip">C#</span><span class="chip">EF Core</span>
+            <span class="chip">Angular / NgRx</span><span class="chip">Kafka</span><span class="chip">RabbitMQ</span>
+            <span class="chip">Redis</span><span class="chip">Docker</span><span class="chip">AKS</span><span class="chip">Azure DevOps</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="sec-head"><span class="idx mono">02</span><h2>Projects</h2></div>
+
+      <div class="project">
+        <div>
+          <div class="sub">PRODUCTION-GRADE BACKEND</div>
+          <h3>Order Management &amp; Payment Processing</h3>
+          <p>Backend system handling the full order lifecycle and payment processing on a microservices architecture, built for high-frequency reads and reliable async workflows.</p>
+          <div class="stack">
+            <span class="chip">ASP.NET Core</span><span class="chip">Kafka</span><span class="chip">RabbitMQ</span><span class="chip">Redis</span><span class="chip">JWT</span>
+          </div>
+        </div>
+        <div class="arch">
+          <div class="row"><span class="node">Order placed</span><span class="arrow">→</span><span class="node">Kafka stream</span><span class="arrow">→</span><span class="node">Payment confirm</span></div>
+          <div class="row"><span class="node">RabbitMQ</span><span class="arrow">→</span><span class="node">Invoice + notify</span></div>
+          <div class="row"><span class="node">Redis</span><span class="arrow">→</span><span class="node">High-frequency reads</span></div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div>
+          <div class="sub">5 INDEPENDENT SERVICES · DB-PER-SERVICE</div>
+          <h3>Leave Management System</h3>
+          <p>Distributed microservices system with an API Gateway, Saga orchestration for cross-service transactions, Circuit Breaker resilience, and full observability.</p>
+          <div class="stack">
+            <span class="chip">ASP.NET Core</span><span class="chip">MongoDB</span><span class="chip">RabbitMQ</span><span class="chip">Nginx</span><span class="chip">ELK</span><span class="chip">Jaeger</span><span class="chip">Consul</span>
+          </div>
+        </div>
+        <div class="arch">
+          <div class="row"><span class="node">API Gateway</span><span class="arrow">→</span><span class="node">5 services</span><span class="arrow">→</span><span class="node">Mongo per service</span></div>
+          <div class="row"><span class="node">Saga</span><span class="arrow">→</span><span class="node">Circuit Breaker</span></div>
+          <div class="row"><span class="node">ELK</span><span class="arrow">+</span><span class="node">Jaeger</span><span class="arrow">+</span><span class="node">Consul</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="sec-head"><span class="idx mono">03</span><h2>Skills</h2></div>
+      <div class="skillgrid">
+        <div class="skillcol">
+          <h4>BACKEND</h4>
+          <ul><li>ASP.NET Core / .NET Core</li><li>C#</li><li>Entity Framework Core</li><li>CQRS</li><li>SQL</li><li>MongoDB</li></ul>
+        </div>
+        <div class="skillcol">
+          <h4>FRONTEND</h4>
+          <ul><li>Angular / NgRx</li><li>React</li><li>JavaScript</li><li>Tailwind CSS</li><li>HTML / CSS</li></ul>
+        </div>
+        <div class="skillcol">
+          <h4>EVENTS &amp; DATA</h4>
+          <ul><li>Apache Kafka</li><li>RabbitMQ</li><li>Redis</li><li>OAuth2 / JWT</li><li>Swagger</li></ul>
+        </div>
+        <div class="skillcol">
+          <h4>DEVOPS &amp; TOOLS</h4>
+          <ul><li>Docker</li><li>Azure Kubernetes Service</li><li>Azure DevOps</li><li>SonarQube</li><li>xUnit / Moq</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="credentials">
+      <div class="sec-head"><span class="idx mono">04</span><h2>Credentials</h2></div>
+      <div class="twocol">
+        <div>
+          <div class="cert"><div class="t">OCI 2025 Certified Developer Professional</div><div class="y">Oracle · 2025</div></div>
+          <div class="cert"><div class="t">OCI 2025 Generative AI Certified Professional</div><div class="y">Oracle · 2025</div></div>
+        </div>
+        <div class="edu">
+          <div class="t">B.Tech, Computer Science &amp; Engineering</div>
+          <div class="s">Pranveer Singh Institute of Technology, Kanpur<br>Aug 2019 — Jul 2023 · CGPA 7.54/10.00</div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="contact">
+      <div>
+        <div class="big">Let's build something that scales.</div>
+        <div class="links" style="margin-top:14px;">
+          <a href="mailto:prakharsh2422@gmail.com">prakharsh2422@gmail.com</a>
+          <a href="tel:+919026256896">+91 90262 56896</a>
+        </div>
+      </div>
+      <div class="links">
+        <a href="#" title="Add your LinkedIn URL">LinkedIn</a>
+        <a href="#" title="Add your GitHub URL">GitHub</a>
+        <a href="#" title="Add your LeetCode URL">LeetCode</a>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<script>
+const links = document.querySelectorAll('.navlink');
+const sections = [...links].map(l => document.querySelector(l.getAttribute('href')));
+window.addEventListener('scroll', () => {
+  let i = sections.findIndex((s,idx) => {
+    const r = s.getBoundingClientRect();
+    return r.top <= 120 && (idx === sections.length-1 || sections[idx+1].getBoundingClientRect().top > 120);
+  });
+  links.forEach(l => l.classList.remove('active'));
+  if (i >= 0) links[i].classList.add('active');
+}, {passive:true});
+</script>
+</body>
+</html>
